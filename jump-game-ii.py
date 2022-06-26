@@ -1,3 +1,10 @@
+#  calculate maxReach 
+#  if i reach to end return jump
+#  if i > maxReach then its not possbile
+#  
+#
+#
+
 class Solution:
     def jump(self, nums: List[int]) -> int:
         maxReach = nums[0]
