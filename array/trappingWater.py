@@ -5,14 +5,12 @@
 class Solution:
     def trappingWater(self, arr,n):
         total = 0
-        temp = [0]*n
         max_val = arr[0]
         max_index = 0
         sums = 0
         for i in range(1,n):
             if max_val > arr[i]:
                 sums += (max_val - arr[i])
-                temp[i] = max_val - arr[i]
             else:
                 max_val = arr[i]
                 max_index = i
