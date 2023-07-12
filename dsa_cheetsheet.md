@@ -50,3 +50,51 @@ def maxProfit(self, prices):
         
         return profit
 ```
+## Contains Duplicate : Check if a value appears atleast twice
+```
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+Example 1:
+Input: nums = [1, 2, 3, 1]
+Output: true.
+Explanation: 1 appeared two times in the input array.
+
+Example 2: 
+Input: nums = [1, 2, 3, 4]
+Output: false
+Explanation: input array does not contain any duplicate number. 
+```
+### Solution
+
+#### Approach 1: we can easily find any duplicate in the array just by using two nested loops. The first loop will pick integers one by one from the array and the second nested loop will check if there exists any duplicate or not. 
+```
+def containsDuplicate(self, nums: List[int]) -> bool:
+        n = len(nums)
+        for i in range(n - 1):
+            for j in range(i + 1, n):
+                if nums[i] == nums[j]:
+                    return True
+        return False
+```
+
+#### Approach 2: Sorting
+```
+def containsDuplicate(self, nums: List[int]) -> bool:
+        nums.sort()
+        n = len(nums)
+        for i in range(1, n):
+            if nums[i] == nums[i - 1]:
+                return True
+        return False
+```
+
+#### Approach 3: Hash Set
+```
+def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = set()
+        for num in nums:
+            if num in seen:
+                return True
+            seen.add(num)
+        return False
+```
