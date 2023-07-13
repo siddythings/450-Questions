@@ -98,3 +98,62 @@ def containsDuplicate(self, nums: List[int]) -> bool:
             seen.add(num)
         return False
 ```
+
+## Kadane’s Algorithm : Maximum Subarray Sum in an Array
+```
+Problem Statement: Given an integer array arr, find the contiguous subarray (containing at least one number) which
+has the largest sum and returns its sum and prints the subarray.
+```
+
+### Solution
+```
+def maxSubArray(self, nums: List[int]) -> int:
+        maxSum = float('-inf')
+        currentSum = 0
+        
+        for num in nums:
+            currentSum += num
+            
+            if currentSum > maxSum:
+                maxSum = currentSum
+            
+            if currentSum < 0:
+                currentSum = 0
+        
+        return maxSum
+```
+
+## Maximum Product Subarray in an Array
+```
+Given an array that contains both negative and positive integers, find the maximum product subarray.
+Input:
+ Nums = [1,2,3,4,5,0]
+Output:
+ 120
+Explanation:
+ In the given array, we can see 1×2×3×4×5 gives maximum product value.
+
+Example 2:
+Input:
+ Nums = [1,2,-3,0,-4,-5]
+Output:
+ 20
+Explanation:
+ In the given array, we can see (-4)×(-5) gives maximum product value.
+```
+
+#### Approch 1
+```
+Find all possible subarrays of the given array. Find the product of each subarray. Return the maximum of all them.
+
+int maxProductSubArray(nums):
+    result = nums[0];
+    for i in range(len(nums)):
+        p = nums[i];
+        for j in range(i+1, len(nums)):
+           result = max(result,p);
+           p *= nums[j];
+        
+        result = max(result,p)
+    return result;
+```
