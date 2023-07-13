@@ -141,7 +141,7 @@ Output:
 Explanation:
  In the given array, we can see (-4)×(-5) gives maximum product value.
 ```
-
+### Solution
 #### Approch 1 (n2)
 ```
 Find all possible subarrays of the given array. Find the product of each subarray. Return the maximum of all them.
@@ -191,4 +191,40 @@ def maxProductSubArray(nums):
         return max(max(maxLeft, maxRight), 0)
     return max(maxLeft, maxRight)
 
+```
+
+## Minimum in Rotated Sorted Array
+```
+Given an integer array arr of size N, sorted in ascending order (with distinct values). Now the array is rotated between 1 to N times which is unknown. Find the minimum element in the array. 
+```
+### Solution
+#### Approch 1(On)
+```
+def findMin(arr: [int]):
+    n = len(arr)  # size of the array.
+    mini = sys.maxsize
+    for i in range(n):
+        # Always keep the minimum.
+        mini = min(mini, arr[i])
+    return mini
+```
+#### Approch 2(Using Binary Search)
+```
+def findMin(arr: [int]):
+    low = 0
+    high = len(arr) - 1
+    ans = sys.maxsize
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if arr[low] <= arr[mid]:  # if left part is sorted
+            ans = min(ans, arr[low])  # keep the minimum
+            low = mid + 1  # eliminate left half
+            
+        else:  # if right part is sorted
+            ans = min(ans, arr[mid])  # keep the minimum
+            high = mid - 1  # eliminate right half
+
+    return ans
 ```
