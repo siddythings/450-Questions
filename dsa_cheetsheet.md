@@ -142,7 +142,7 @@ Explanation:
  In the given array, we can see (-4)×(-5) gives maximum product value.
 ```
 
-#### Approch 1
+#### Approch 1 (n2)
 ```
 Find all possible subarrays of the given array. Find the product of each subarray. Return the maximum of all them.
 
@@ -156,4 +156,39 @@ int maxProductSubArray(nums):
         
         result = max(result,p)
     return result;
+```
+#### Approch 2 (On)
+```
+Idea is to find the maximum product from both sides,i.e, once in a forwarding direction and another in the backward direction.
+
+def maxProductSubArray(nums):
+    maxLeft = nums[0]
+    maxRight = nums[0]
+
+    prod = 1
+
+    zeroPresent = False
+
+    for i in nums:
+        prod *= i
+        if i == 0:
+            zeroPresent = True
+            prod = 1
+            continue
+        maxLeft = max(maxLeft, prod)
+
+    prod = 1
+
+    for j in range(len(nums) - 1, -1, -1):
+        prod *= nums[j]
+        if nums[j] == 0:
+            zeroPresent = True
+            prod = 1
+            continue
+        maxRight = max(maxRight, prod)
+
+    if zeroPresent:
+        return max(max(maxLeft, maxRight), 0)
+    return max(maxLeft, maxRight)
+
 ```
