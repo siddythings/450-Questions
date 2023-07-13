@@ -228,3 +228,4 @@ def findMin(arr: [int]):
 
     return ans
 ```
+
