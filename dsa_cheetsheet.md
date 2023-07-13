@@ -290,3 +290,46 @@ def threeSum(nums: List[int]) -> List[List[int]]:
     return res
 
 ```
+
+### Container with most water 
+```
+Given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]). Find two lines that together with the x-axis form a container, such that the container contains the most water. Return the maximum amount of water a container can store.
+Input: nums = [1,4,2,3]
+Output: 6
+```
+### Solution
+#### Approch 1
+```
+To get the maximum water, we can calculate using 2 loops. At each iteration, we require a distance between 2 lines and the minimum of those lines. So we start with i= 0 and j=i+1. Then calculate max at nums[i] for every other j. We keep a global max and when both loops are done, the value of the max is the answer.
+
+mx = float('-inf')
+for i in range(len(nums)):
+    for j in range(i + 1, len(nums)):
+        water = (j - i) * min(nums[i], nums[j])
+        mx = max(mx, water)
+return mx
+
+```
+#### Approch 2
+```
+We can improve the above approach by using 2 pointers. The basic equation is                
+ (j-i)*min(nums[j],nums[i]).  So we start by maximizing j-i , that is , start with i=0 and j= nums.size()-1. 
+There is a global max where we keep track of water at each site.
+
+def maxArea(nums):
+    i = 0
+    j = len(nums) - 1
+    mx = float('-inf')
+    
+    while i < j:
+        water = (j - i) * min(nums[i], nums[j])
+        mx = max(mx, water)
+        
+        if nums[i] < nums[j]:
+            i += 1
+        else:
+            j -= 1
+    
+    return mx
+
+```
